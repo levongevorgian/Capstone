@@ -1,0 +1,5 @@
+model,target_split,worst_group,worst_group_accuracy,best_group,best_group_accuracy,worst_to_best_accuracy_gap
+EfficientNet-B0,test,test_waterbird_land,0.3399999999999999,test_landbird_land,0.98,0.6400000000000001
+EfficientNet-B0,val,val_waterbird_land,0.3759398496240601,val_landbird_land,0.9833333333333334,0.6073934837092734
+ResNet-50,test,test_waterbird_land,0.42,test_landbird_land,0.99,0.5700000000000001
+ResNet-50,val,val_waterbird_land,0.4060150375939849,val_landbird_land,0.99,0.5839849624060152

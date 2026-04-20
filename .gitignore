@@ -42,9 +42,9 @@ temp/
 
 # Model / package caches
 .cache/
+.mpl-cache/
 ~/.cache/
 wandb/
 
 # Logs
 *.log
-
