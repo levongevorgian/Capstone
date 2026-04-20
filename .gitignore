@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local datasets and downloaded archives
+data/
+*.tar.gz
+*.tgz
+*.zip
+*.npz
+
+# Generated experiment outputs
+results/
+results_*/
+
+# Local fixtures and temporary outputs
+waterbirds_fixture/
+tmp/
+temp/
+*.tmp
+
+# Model / package caches
+.cache/
+~/.cache/
+wandb/
+
+# Logs
+*.log
+
