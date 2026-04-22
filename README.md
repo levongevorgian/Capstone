@@ -1,51 +1,66 @@
 # Feature-Space Drift Detection for Image Classification
 
-This repository contains the cleaned capstone project for evaluating whether label-free feature drift metrics can serve as practical proxies for model degradation in image classification systems.
+This repository contains the code, result snapshots, figures, and supporting materials for experiments on label-free feature drift detection in image classification.
 
-The project studies that question across three benchmark settings:
+The project evaluates whether feature-space drift statistics can serve as practical indicators of model performance degradation across:
 
-- `CIFAR-10` for controlled synthetic corruptions
-- `BloodMNIST` for a second controlled benchmark in a medical-image domain
-- `Waterbirds` for natural subgroup and spurious-correlation shift
+- `CIFAR-10` under controlled synthetic corruptions
+- `BloodMNIST` under controlled synthetic corruptions
+- `Waterbirds` under natural subgroup and spurious-correlation shift
 
-## Project Layout
+## Repository Structure
 
 ```text
-CAP/
-├── paper/                      # Paper PDF 
+├── paper/                      # Paper PDF
 ├── code/
-│   ├── main_codes/             # experiment runners
-│   ├── visualizations/         # figure-generation code and figure assets
-│   └── utils/                  # shared helpers
+│   ├── main_codes/                    # experiment runners
+│   ├── utils/                         # shared plotting utilities
+│   └── visualizations/
+│       ├── code/                      # figure and analysis scripts
+│       └── figures/                   # generated final and diagnostic figures
 ├── data/
-│   ├── raw_data/               # local datasets (gitignored)
-│   └── processed_data/         # processed analysis tables kept with the repo
-├── notebooks/                  # narrative notebook
-├── outputs/                    # result snapshots and local run outputs
-├── docs/                       # internal notes and file guide
+│   ├── raw_data/                      # local datasets and caches
+│   └── processed_data/
+│       └── waterbirds_analysis/       # generated Waterbirds analysis tables and report
+├── docs/
+│   └── run_guide.md                   # command reference
+├── outputs/
+│   ├── figures/                       # reserved export directory for additional figure copies
+│   ├── reports/                       # reserved export directory for additional report copies
+│   └── results/                       # experiment outputs and archived runs
+├── paper/
+│   ├── figures/                       # paper-specific figure assets
+│   └── proposal/                      # paper PDF
+├── LICENSE
 ├── README.md
-├── requirements.txt
-├── .gitignore
-└── LICENSE
+└── requirements.txt
 ```
 
-## Main Files
+## Main Components
 
 - [code/main_codes/experiment_runner.py](/Users/levongevorgyan/Desktop/CAP/code/main_codes/experiment_runner.py) runs the main controlled-benchmark and Waterbirds experiments.
+<<<<<<< HEAD
 - [code/main_codes/waterbirds_reference_runner.py](/Users/levongevorgyan/Desktop/CAP/code/main_codes/waterbirds_reference_runner.py) evaluates the class-conditional Waterbirds reference design.
 - [code/main_codes/waterbirds_mitigation_runner.py](/Users/levongevorgyan/Desktop/CAP/code/main_codes/waterbirds_mitigation_runner.py) compares subgroup-aware probe-training strategies.
 - [code/visualizations/code/analysis_visualizations.py](/Users/levongevorgyan/Desktop/CAP/code/visualizations/code/analysis_visualizations.py) generates the diagnostic figures.
 - [code/visualizations/code/waterbirds_detailed_analysis.py](/Users/levongevorgyan/Desktop/CAP/code/visualizations/code/waterbirds_detailed_analysis.py) produces the Waterbirds subgroup analysis tables and report.
+=======
+- [code/main_codes/waterbirds_reference_runner.py](/Users/levongevorgyan/Desktop/CAP/code/main_codes/waterbirds_reference_runner.py) evaluates Waterbirds with class-conditional reference groups.
+- [code/main_codes/waterbirds_mitigation_runner.py](/Users/levongevorgyan/Desktop/CAP/code/main_codes/waterbirds_mitigation_runner.py) compares probe-training strategies for Waterbirds subgroup robustness.
+- [code/visualizations/code/analysis_visualizations.py](/Users/levongevorgyan/Desktop/CAP/code/visualizations/code/analysis_visualizations.py) generates final and diagnostic figures from saved experiment outputs.
+- [code/visualizations/code/waterbirds_detailed_analysis.py](/Users/levongevorgyan/Desktop/CAP/code/visualizations/code/waterbirds_detailed_analysis.py) produces Waterbirds subgroup summaries and a Markdown report.
+- [docs/run_guide.md](/Users/levongevorgyan/Desktop/CAP/docs/run_guide.md) provides a concise command reference.
+>>>>>>> 88338b3 (Add improved versions of files)
 
 ## Setup
 
-Create a Python environment and install the requirements:
+Install the Python dependencies:
 
 ```bash
 python3 -m pip install -r requirements.txt
 ```
 
-Optional import check:
+Optional syntax check:
 
 ```bash
 python3 -m py_compile \
@@ -56,16 +71,17 @@ python3 -m py_compile \
   code/visualizations/code/waterbirds_detailed_analysis.py
 ```
 
-## Data Locations
+## Data Requirements
 
-Expected local dataset paths:
+Expected dataset locations:
 
 - `data/raw_data/` for CIFAR-10 cache files and BloodMNIST downloads
 - `data/raw_data/waterbirds/` for the Waterbirds dataset root containing `metadata.csv`
+- a separate local ImageFolder-style directory if `imagenet_local` is used
 
-Raw datasets are ignored by Git and should remain local.
+Large raw datasets are kept local and are not intended to be versioned with the repository.
 
-## Running The Core Experiments
+## Running Experiments
 
 ### CIFAR-10
 
@@ -121,32 +137,57 @@ python3 code/main_codes/experiment_runner.py \
   --random-weights
 ```
 
-## Generating Figures And Reports
+### Waterbirds Reference Evaluation
 
+<<<<<<< HEAD
 Generate the diagnostic figures:
+=======
+```bash
+python3 code/main_codes/waterbirds_reference_runner.py \
+  --waterbirds-root data/raw_data/waterbirds \
+  --output-dir outputs/results/improved/results_waterbirds_improved
+```
+
+### Waterbirds Bias-Mitigation Comparison
+
+```bash
+python3 code/main_codes/waterbirds_mitigation_runner.py \
+  --waterbirds-root data/raw_data/waterbirds \
+  --output-dir outputs/results/bias_mitigation/results_waterbirds_mitigation_resnet
+```
+
+## Generating Figures and Analysis Outputs
+
+Generate the final and diagnostic figures:
+>>>>>>> 88338b3 (Add improved versions of files)
 
 ```bash
 python3 code/visualizations/code/analysis_visualizations.py
 ```
 
-Generate the Waterbirds subgroup report:
+This script writes figures to:
+
+- `code/visualizations/figures/final/`
+- `code/visualizations/figures/diagnostics/`
+
+Generate the Waterbirds subgroup analysis:
 
 ```bash
 python3 code/visualizations/code/waterbirds_detailed_analysis.py
 ```
 
-By default, figures are written to:
-
-- `code/visualizations/figures/final/`
-- `code/visualizations/figures/diagnostics/`
-
-The Waterbirds analysis tables and report are written to:
+This script writes tables and the Markdown report to:
 
 - `data/processed_data/waterbirds_analysis/`
 
-## Result Files
+## Output Locations
 
-Each experiment run writes:
+- `outputs/results/` stores experiment run outputs such as CSV summaries and JSON summaries.
+- `code/visualizations/figures/` stores the project's generated figure assets currently used by the repository.
+- `data/processed_data/waterbirds_analysis/` stores derived Waterbirds analysis tables and the generated Markdown report.
+- `outputs/figures/` and `outputs/reports/` currently function as reserved export directories for additional deliverables, but they are not the primary destinations used by the current scripts.
+
+Each standard experiment run produces:
 
 - `experiment_results_raw.csv`
 - `experiment_results_summary.csv`
@@ -154,10 +195,14 @@ Each experiment run writes:
 - `calibration_summary.csv`
 - `summary.json`
 
-The repository currently keeps representative result snapshots under `outputs/results/` and uses `code/visualizations/figures/` for the curated figures included with the project.
+## Included Results
 
-## Notes On Interpretation
+The repository includes representative output snapshots under:
 
-- Controlled corruption results support strong drift-versus-degradation claims within the tested settings.
-- Waterbirds should be interpreted separately as a natural subgroup-shift benchmark.
-- The strongest Waterbirds takeaway is subgroup disparity and worst-group collapse, not a single pooled drift-performance correlation.
+- `outputs/results/controlled/`
+- `outputs/results/waterbirds/`
+- `outputs/results/improved/`
+- `outputs/results/bias_mitigation/`
+- `outputs/results/archive/`
+
+These directories contain saved runs for analysis, comparison, and figure generation.

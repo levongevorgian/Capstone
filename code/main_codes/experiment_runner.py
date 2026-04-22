@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 """Experiment pipeline for label-free drift detection in image classification.
 
-The code supports:
+This module provides:
+- isolated drift families for controlled evaluation
+- accuracy-drop measurement using a clean-data linear probe
+- repeated trials for stability analysis
+- threshold calibration from clean reference windows
+- dataset abstractions for multiple benchmark settings
+
+Supported dataset modes:
 - `cifar10`
 - `cifar100`
 - `imagenet_local` via an ImageFolder-style directory

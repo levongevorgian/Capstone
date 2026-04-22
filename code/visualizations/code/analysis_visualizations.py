@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate final and diagnostic figures for the capstone repository."""
+"""Generate final and diagnostic figures for the Capstone repository."""
 
 from __future__ import annotations
 

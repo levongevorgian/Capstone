@@ -47,3 +47,6 @@ wandb/
 tmp/
 temp/
 *.tmp
+
+.Rhistory
+*.Rhistory
