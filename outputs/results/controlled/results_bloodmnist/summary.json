@@ -1,0 +1,67 @@
+{
+  "seed": 42,
+  "datasets": [
+    "bloodmnist"
+  ],
+  "dataset_notes": {
+    "bloodmnist": "BloodMNIST medical benchmark split with synthetic corruption evaluation."
+  },
+  "train_size": 300,
+  "test_size": 150,
+  "trials": 2,
+  "random_weights": false,
+  "output_files": {
+    "raw_results": "/Users/levongevorgyan/Desktop/CAP/results_bloodmnist/experiment_results_raw.csv",
+    "summary_results": "/Users/levongevorgyan/Desktop/CAP/results_bloodmnist/experiment_results_summary.csv",
+    "correlations": "/Users/levongevorgyan/Desktop/CAP/results_bloodmnist/correlation_summary.csv",
+    "calibration": "/Users/levongevorgyan/Desktop/CAP/results_bloodmnist/calibration_summary.csv"
+  },
+  "correlations": [
+    {
+      "dataset": "bloodmnist",
+      "model": "ResNet-50",
+      "pearson_accuracy_vs_ks": 0.8661119623041302,
+      "pearson_accuracy_vs_mmd": 0.8738805912618142,
+      "spearman_accuracy_vs_ks": 0.8673207144463044,
+      "spearman_accuracy_vs_mmd": 0.8941663556077376
+    },
+    {
+      "dataset": "bloodmnist",
+      "model": "EfficientNet-B0",
+      "pearson_accuracy_vs_ks": 0.9287269315790145,
+      "pearson_accuracy_vs_mmd": 0.9224391943771113,
+      "spearman_accuracy_vs_ks": 0.9482957200795522,
+      "spearman_accuracy_vs_mmd": 0.8924527878175067
+    }
+  ],
+  "high_level_findings": [
+    {
+      "dataset": "bloodmnist",
+      "model": "ResNet-50",
+      "largest_accuracy_drop": {
+        "drift_type": "gaussian_noise",
+        "severity": "high",
+        "accuracy_drop": 0.5233333333333333
+      },
+      "largest_mmd": {
+        "drift_type": "gaussian_noise",
+        "severity": "high",
+        "mmd": 0.7180847227573395
+      }
+    },
+    {
+      "dataset": "bloodmnist",
+      "model": "EfficientNet-B0",
+      "largest_accuracy_drop": {
+        "drift_type": "gaussian_noise",
+        "severity": "high",
+        "accuracy_drop": 0.5966666666666667
+      },
+      "largest_mmd": {
+        "drift_type": "gaussian_noise",
+        "severity": "high",
+        "mmd": 0.7271125316619873
+      }
+    }
+  ]
+}

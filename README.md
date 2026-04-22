@@ -1,111 +1,153 @@
 # Feature-Space Drift Detection for Image Classification
 
-This repository contains the capstone experiment pipeline for evaluating whether label-free feature drift metrics can act as practical proxies for model degradation in image classification systems.
+This repository contains the cleaned capstone project for evaluating whether label-free feature drift metrics can serve as practical proxies for model degradation in image classification systems.
 
-The project compares deep feature distributions from pretrained `ResNet-50` and `EfficientNet-B0`, measures drift with `KS` and `MMD`, measures performance drop with a linear probe, and calibrates alert thresholds from clean or reference windows.
+The project studies that question across three benchmark settings:
 
-## Research Goal
+- `CIFAR-10` for controlled synthetic corruptions
+- `BloodMNIST` for a second controlled benchmark in a medical-image domain
+- `Waterbirds` for natural subgroup and spurious-correlation shift
 
-In simple terms: if the input data distribution changes, can we detect that change from model features before or while classification accuracy starts to degrade?
-
-The repository evaluates that question across:
-
-- `CIFAR-10` as a controlled synthetic-corruption benchmark
-- `BloodMNIST` as a second controlled benchmark in a medical-image domain
-- `Waterbirds` as a realistic natural-shift benchmark with spurious correlations
-
-## What Each Benchmark Demonstrates
-
-- `CIFAR-10`
-  Controlled corruption benchmark for testing whether feature drift tracks accuracy drop under synthetic shift.
-- `BloodMNIST`
-  A second controlled benchmark showing the same methodology on a different image domain.
-- `Waterbirds`
-  A natural-shift benchmark showing how the method behaves under subgroup and environment shift rather than synthetic severity levels.
-
-## Main Methods
-
-- Backbone feature extractors: `ResNet-50`, `EfficientNet-B0`
-- Drift metrics: Kolmogorov-Smirnov (`KS`), Maximum Mean Discrepancy (`MMD`)
-- Performance proxy: linear probe trained on clean/reference features
-- Thresholding: calibration from clean or matched-reference windows
-
-## Repository Structure
+## Project Layout
 
 ```text
-.
-├── cap_experiments.py      # Main experiment runner
-├── CAP.ipynb               # Lightweight notebook entry point / narrative companion
-├── RUN_EXPERIMENTS.md      # Exact run commands and dataset setup notes
-├── REPORT_RESULTS.md       # Thesis-safe interpretation of the completed runs
-├── requirements.txt        # Python dependencies
-├── LICENSE                 # Repository license
-└── Levon Gevorgyan_Capstone Project Proposal.pdf
+CAP/
+├── paper/                      # proposal PDF and paper assets
+├── code/
+│   ├── main_codes/             # experiment runners
+│   ├── visualizations/         # figure-generation code and figure assets
+│   └── utils/                  # shared helpers
+├── data/
+│   ├── raw_data/               # local datasets (gitignored)
+│   └── processed_data/         # processed analysis tables kept with the repo
+├── notebooks/                  # narrative notebook
+├── outputs/                    # result snapshots and local run outputs
+├── docs/                       # internal notes and file guide
+├── README.md
+├── requirements.txt
+├── .gitignore
+└── LICENSE
 ```
 
-Generated data and result artifacts are intentionally not committed.
+## Main Files
 
-## Installation
+- [code/main_codes/experiment_runner.py](/Users/levongevorgyan/Desktop/CAP/code/main_codes/experiment_runner.py) runs the main controlled-benchmark and Waterbirds experiments.
+- [code/main_codes/waterbirds_reference_runner.py](/Users/levongevorgyan/Desktop/CAP/code/main_codes/waterbirds_reference_runner.py) evaluates the class-conditional Waterbirds reference design.
+- [code/main_codes/waterbirds_mitigation_runner.py](/Users/levongevorgyan/Desktop/CAP/code/main_codes/waterbirds_mitigation_runner.py) compares subgroup-aware probe-training strategies.
+- [code/visualizations/code/analysis_visualizations.py](/Users/levongevorgyan/Desktop/CAP/code/visualizations/code/analysis_visualizations.py) generates the publication-ready and diagnostic figures.
+- [code/visualizations/code/waterbirds_detailed_analysis.py](/Users/levongevorgyan/Desktop/CAP/code/visualizations/code/waterbirds_detailed_analysis.py) produces the Waterbirds subgroup analysis tables and report.
+- [docs/project_file_guide.md](/Users/levongevorgyan/Desktop/CAP/docs/project_file_guide.md) explains the repository in simple language.
 
-1. Create and activate a Python environment.
-2. Install dependencies:
+## Setup
+
+Create a Python environment and install the requirements:
 
 ```bash
 python3 -m pip install -r requirements.txt
 ```
 
-3. Optional but recommended: verify the script imports cleanly.
+Optional import check:
 
 ```bash
-python3 -m py_compile cap_experiments.py
+python3 -m py_compile \
+  code/main_codes/experiment_runner.py \
+  code/main_codes/waterbirds_reference_runner.py \
+  code/main_codes/waterbirds_mitigation_runner.py \
+  code/visualizations/code/analysis_visualizations.py \
+  code/visualizations/code/waterbirds_detailed_analysis.py
 ```
 
-## Datasets
+## Data Locations
 
-Datasets are not committed to this repository.
+Expected local dataset paths:
 
-- `CIFAR-10` can be downloaded automatically by `torchvision`
-- `BloodMNIST` can be downloaded automatically through `medmnist`
-- `Waterbirds` must be downloaded separately and extracted locally
+- `data/raw_data/` for CIFAR-10 cache files and BloodMNIST downloads
+- `data/raw_data/waterbirds/` for the Waterbirds dataset root containing `metadata.csv`
 
-Expected local dataset locations:
+Raw datasets are ignored by Git and should remain local.
 
-- `./data/` for CIFAR-10 and BloodMNIST cache files
-- `./data/waterbirds/` for the Waterbirds dataset root containing `metadata.csv`
-
-## Exact Commands
+## Running The Core Experiments
 
 ### CIFAR-10
 
-Recommended run:
-
 ```bash
-python3 cap_experiments.py --datasets cifar10 --train-size 300 --test-size 150 --probe-epochs 8 --trials 2 --max-feature-dims 128 --download --output-dir results_cifar10
+python3 code/main_codes/experiment_runner.py \
+  --datasets cifar10 \
+  --train-size 300 \
+  --test-size 150 \
+  --probe-epochs 8 \
+  --trials 2 \
+  --max-feature-dims 128 \
+  --download \
+  --output-dir outputs/results/controlled/results_cifar10
 ```
 
 ### BloodMNIST
 
 ```bash
-python3 cap_experiments.py --datasets bloodmnist --train-size 300 --test-size 150 --probe-epochs 8 --trials 2 --max-feature-dims 128 --download --output-dir results_bloodmnist
+python3 code/main_codes/experiment_runner.py \
+  --datasets bloodmnist \
+  --train-size 300 \
+  --test-size 150 \
+  --probe-epochs 8 \
+  --trials 2 \
+  --max-feature-dims 128 \
+  --download \
+  --output-dir outputs/results/controlled/results_bloodmnist
 ```
 
 ### Waterbirds
 
-Download and extract the official Waterbirds dataset locally, then run:
-
 ```bash
-python3 cap_experiments.py --datasets waterbirds --waterbirds-root ./data/waterbirds --train-size 300 --test-size 150 --probe-epochs 8 --trials 2 --max-feature-dims 128 --output-dir results_waterbirds
+python3 code/main_codes/experiment_runner.py \
+  --datasets waterbirds \
+  --waterbirds-root data/raw_data/waterbirds \
+  --train-size 300 \
+  --test-size 150 \
+  --probe-epochs 8 \
+  --trials 2 \
+  --max-feature-dims 128 \
+  --output-dir outputs/results/waterbirds/results_waterbirds
 ```
 
 ### Smoke Test
 
 ```bash
-python3 cap_experiments.py --datasets fake --train-size 32 --test-size 24 --probe-epochs 1 --trials 1 --random-weights
+python3 code/main_codes/experiment_runner.py \
+  --datasets fake \
+  --train-size 32 \
+  --test-size 24 \
+  --probe-epochs 1 \
+  --trials 1 \
+  --random-weights
 ```
 
-## Expected Outputs
+## Generating Figures And Reports
 
-Each run writes a result directory containing:
+Generate the publication and diagnostic figures:
+
+```bash
+python3 code/visualizations/code/analysis_visualizations.py
+```
+
+Generate the Waterbirds subgroup report:
+
+```bash
+python3 code/visualizations/code/waterbirds_detailed_analysis.py
+```
+
+By default, figures are written to:
+
+- `code/visualizations/figures/final/`
+- `code/visualizations/figures/diagnostics/`
+
+The Waterbirds analysis tables and report are written to:
+
+- `data/processed_data/waterbirds_analysis/`
+
+## Result Files
+
+Each experiment run writes:
 
 - `experiment_results_raw.csv`
 - `experiment_results_summary.csv`
@@ -113,20 +155,10 @@ Each run writes a result directory containing:
 - `calibration_summary.csv`
 - `summary.json`
 
-## Reproducibility Notes
+The repository currently keeps representative result snapshots under `outputs/results/` and uses `code/visualizations/figures/` for the curated figures included with the project.
 
-- CIFAR-10 and BloodMNIST share the same controlled synthetic drift families:
-  `gaussian_noise`, `motion_blur`, `brightness_shift`
-- Waterbirds uses a different evaluation design because it is a natural-shift benchmark
-- The pipeline uses fixed seeds and repeated trials for more stable estimates
-- `--max-feature-dims` provides a faster CPU-friendly approximation for KS and MMD on high-dimensional feature maps
+## Notes On Interpretation
 
-## Limitations
-
-- Controlled corruption results do not automatically imply real-world deployment robustness
-- Waterbirds evaluates natural subgroup shift, which is conceptually different from synthetic severity experiments
-- Threshold calibration is useful for monitoring experiments, but not by itself a full production alerting policy
-
-## License
-
-This repository is released under the MIT License.
+- Controlled corruption results support strong drift-versus-degradation claims within the tested settings.
+- Waterbirds should be interpreted separately as a natural subgroup-shift benchmark.
+- The strongest Waterbirds takeaway is subgroup disparity and worst-group collapse, not a single pooled drift-performance correlation.

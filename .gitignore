@@ -24,27 +24,26 @@ Thumbs.db
 .vscode/
 
 # Local datasets and downloaded archives
-data/
+data/raw_data/**
+!data/raw_data/.gitkeep
 *.tar.gz
 *.tgz
 *.zip
 *.npz
 
-# Generated experiment outputs
-results/
-results_*/
+# Generated outputs and local experiment runs
+outputs/results/archive/
+outputs/results/improved/
+outputs/results/bias_mitigation/
+outputs/figures/generated/
 
-# Local fixtures and temporary outputs
-waterbirds_fixture/
+# Local caches
+.cache/
+.mpl-cache/
+wandb/
+
+# Logs and temp files
+*.log
 tmp/
 temp/
 *.tmp
-
-# Model / package caches
-.cache/
-.mpl-cache/
-~/.cache/
-wandb/
-
-# Logs
-*.log

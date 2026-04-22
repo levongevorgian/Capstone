@@ -1,0 +1,68 @@
+{
+  "seed": 42,
+  "datasets": [
+    "waterbirds"
+  ],
+  "dataset_notes": {
+    "waterbirds": "Waterbirds natural-shift benchmark using metadata-defined environments. Train features are fit on train split labels; reference drift calibration uses matched validation groups."
+  },
+  "train_size": 300,
+  "test_size": 150,
+  "trials": 2,
+  "random_weights": false,
+  "waterbirds_design": {
+    "reference_group": "matched validation subset",
+    "targets": "validation/test alignment groups and class-background environments",
+    "claim_scope": "natural distribution shift and spurious-correlation sensitivity, not synthetic corruption robustness"
+  },
+  "output_files": {
+    "raw_results": "/Users/levongevorgyan/Desktop/CAP/results_waterbirds/experiment_results_raw.csv",
+    "summary_results": "/Users/levongevorgyan/Desktop/CAP/results_waterbirds/experiment_results_summary.csv",
+    "correlations": "/Users/levongevorgyan/Desktop/CAP/results_waterbirds/correlation_summary.csv",
+    "calibration": "/Users/levongevorgyan/Desktop/CAP/results_waterbirds/calibration_summary.csv"
+  },
+  "correlations": [
+    {
+      "dataset": "waterbirds",
+      "model": "ResNet-50",
+      "pearson_accuracy_vs_ks": 0.3345757282969682,
+      "pearson_accuracy_vs_mmd": 0.33142195579804956,
+      "spearman_accuracy_vs_ks": 0.42869565217391303,
+      "spearman_accuracy_vs_mmd": 0.3817391304347826
+    },
+    {
+      "dataset": "waterbirds",
+      "model": "EfficientNet-B0",
+      "pearson_accuracy_vs_ks": 0.3453804186900272,
+      "pearson_accuracy_vs_mmd": 0.32881189464148664,
+      "spearman_accuracy_vs_ks": 0.4843478260869564,
+      "spearman_accuracy_vs_mmd": 0.477391304347826
+    }
+  ],
+  "high_level_findings": [
+    {
+      "dataset": "waterbirds",
+      "model": "ResNet-50",
+      "largest_accuracy_drop": {
+        "target_group": "val_waterbird_land",
+        "accuracy_drop": 0.5539849624060151
+      },
+      "largest_mmd": {
+        "target_group": "val_waterbird_water",
+        "mmd": 0.27546317875385284
+      }
+    },
+    {
+      "dataset": "waterbirds",
+      "model": "EfficientNet-B0",
+      "largest_accuracy_drop": {
+        "target_group": "test_waterbird_land",
+        "accuracy_drop": 0.6266666666666667
+      },
+      "largest_mmd": {
+        "target_group": "val_waterbird_water",
+        "mmd": 0.21813055872917175
+      }
+    }
+  ]
+}

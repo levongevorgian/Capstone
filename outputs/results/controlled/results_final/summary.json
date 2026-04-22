@@ -1,0 +1,67 @@
+{
+  "seed": 42,
+  "datasets": [
+    "cifar10"
+  ],
+  "dataset_notes": {
+    "cifar10": "CIFAR-10 benchmark split"
+  },
+  "train_size": 300,
+  "test_size": 150,
+  "trials": 2,
+  "random_weights": false,
+  "output_files": {
+    "raw_results": "/Users/levongevorgyan/Desktop/CAP/results_final/experiment_results_raw.csv",
+    "summary_results": "/Users/levongevorgyan/Desktop/CAP/results_final/experiment_results_summary.csv",
+    "correlations": "/Users/levongevorgyan/Desktop/CAP/results_final/correlation_summary.csv",
+    "calibration": "/Users/levongevorgyan/Desktop/CAP/results_final/calibration_summary.csv"
+  },
+  "correlations": [
+    {
+      "dataset": "cifar10",
+      "model": "ResNet-50",
+      "pearson_accuracy_vs_ks": 0.9087107866350813,
+      "pearson_accuracy_vs_mmd": 0.8288046251313967,
+      "spearman_accuracy_vs_ks": 0.910124452588565,
+      "spearman_accuracy_vs_mmd": 0.8708682332941661
+    },
+    {
+      "dataset": "cifar10",
+      "model": "EfficientNet-B0",
+      "pearson_accuracy_vs_ks": 0.9704869519121639,
+      "pearson_accuracy_vs_mmd": 0.8995320415428427,
+      "spearman_accuracy_vs_ks": 0.9236326109391124,
+      "spearman_accuracy_vs_mmd": 0.9298245614035088
+    }
+  ],
+  "high_level_findings": [
+    {
+      "dataset": "cifar10",
+      "model": "ResNet-50",
+      "largest_accuracy_drop": {
+        "drift_type": "gaussian_noise",
+        "severity": "high",
+        "accuracy_drop": 0.5033333333333334
+      },
+      "largest_mmd": {
+        "drift_type": "gaussian_noise",
+        "severity": "high",
+        "mmd": 0.5930964052677155
+      }
+    },
+    {
+      "dataset": "cifar10",
+      "model": "EfficientNet-B0",
+      "largest_accuracy_drop": {
+        "drift_type": "gaussian_noise",
+        "severity": "high",
+        "accuracy_drop": 0.55
+      },
+      "largest_mmd": {
+        "drift_type": "gaussian_noise",
+        "severity": "high",
+        "mmd": 0.5144399106502533
+      }
+    }
+  ]
+}

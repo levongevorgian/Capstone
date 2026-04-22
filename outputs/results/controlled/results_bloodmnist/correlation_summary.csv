@@ -1,0 +1,3 @@
+dataset,model,pearson_accuracy_vs_ks,pearson_accuracy_vs_mmd,spearman_accuracy_vs_ks,spearman_accuracy_vs_mmd
+bloodmnist,ResNet-50,0.8661119623041302,0.8738805912618142,0.8673207144463044,0.8941663556077376
+bloodmnist,EfficientNet-B0,0.9287269315790145,0.9224391943771113,0.9482957200795522,0.8924527878175067

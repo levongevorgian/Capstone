@@ -1,0 +1,5 @@
+dataset,model,trial,reference_group,ks_threshold,mmd_threshold,reference_accuracy
+waterbirds,ResNet-50,0,val_matched,0.18712158203125,0.15786441043019295,0.9466666666666667
+waterbirds,EfficientNet-B0,0,val_matched,0.196435546875,0.1561116822063923,0.96
+waterbirds,ResNet-50,1,val_matched,0.19517822265624998,0.1612823225557804,0.9733333333333334
+waterbirds,EfficientNet-B0,1,val_matched,0.19053955078125,0.15324617996811865,0.9733333333333334
