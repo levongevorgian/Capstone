@@ -1,1 +1,1 @@
-"""Main experiment entry points for the CAP repository."""
+"""Main experiment entry points for the Capstone repository."""
