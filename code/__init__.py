@@ -1,1 +1,1 @@
-"""Source package for the CAP repository."""
+"""Source package for the Capstone repository."""
