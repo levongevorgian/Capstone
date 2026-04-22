@@ -34,9 +34,8 @@ CAP/
 - [code/main_codes/experiment_runner.py](/Users/levongevorgyan/Desktop/CAP/code/main_codes/experiment_runner.py) runs the main controlled-benchmark and Waterbirds experiments.
 - [code/main_codes/waterbirds_reference_runner.py](/Users/levongevorgyan/Desktop/CAP/code/main_codes/waterbirds_reference_runner.py) evaluates the class-conditional Waterbirds reference design.
 - [code/main_codes/waterbirds_mitigation_runner.py](/Users/levongevorgyan/Desktop/CAP/code/main_codes/waterbirds_mitigation_runner.py) compares subgroup-aware probe-training strategies.
-- [code/visualizations/code/analysis_visualizations.py](/Users/levongevorgyan/Desktop/CAP/code/visualizations/code/analysis_visualizations.py) generates the publication-ready and diagnostic figures.
+- [code/visualizations/code/analysis_visualizations.py](/Users/levongevorgyan/Desktop/CAP/code/visualizations/code/analysis_visualizations.py) generates the diagnostic figures.
 - [code/visualizations/code/waterbirds_detailed_analysis.py](/Users/levongevorgyan/Desktop/CAP/code/visualizations/code/waterbirds_detailed_analysis.py) produces the Waterbirds subgroup analysis tables and report.
-- [docs/project_file_guide.md](/Users/levongevorgyan/Desktop/CAP/docs/project_file_guide.md) explains the repository in simple language.
 
 ## Setup
 
@@ -124,7 +123,7 @@ python3 code/main_codes/experiment_runner.py \
 
 ## Generating Figures And Reports
 
-Generate the publication and diagnostic figures:
+Generate the diagnostic figures:
 
 ```bash
 python3 code/visualizations/code/analysis_visualizations.py
