@@ -1,4 +1,4 @@
-"""Shared plotting style and path helpers for CAP visualizations."""
+"""Shared plotting style and path helpers for visualizations."""
 
 from __future__ import annotations
 
