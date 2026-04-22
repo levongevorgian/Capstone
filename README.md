@@ -12,7 +12,7 @@ The project studies that question across three benchmark settings:
 
 ```text
 CAP/
-├── paper/                      # proposal PDF and paper assets
+├── paper/                      # Paper PDF 
 ├── code/
 │   ├── main_codes/             # experiment runners
 │   ├── visualizations/         # figure-generation code and figure assets
