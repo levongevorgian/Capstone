@@ -1,0 +1,67 @@
+{
+  "seed": 42,
+  "datasets": [
+    "fake"
+  ],
+  "dataset_notes": {
+    "fake": "Synthetic smoke-test dataset"
+  },
+  "train_size": 32,
+  "test_size": 24,
+  "trials": 1,
+  "random_weights": true,
+  "output_files": {
+    "raw_results": "/Users/levongevorgyan/Desktop/CAP/outputs/results/controlled/default_run/experiment_results_raw.csv",
+    "summary_results": "/Users/levongevorgyan/Desktop/CAP/outputs/results/controlled/default_run/experiment_results_summary.csv",
+    "correlations": "/Users/levongevorgyan/Desktop/CAP/outputs/results/controlled/default_run/correlation_summary.csv",
+    "calibration": "/Users/levongevorgyan/Desktop/CAP/outputs/results/controlled/default_run/calibration_summary.csv"
+  },
+  "correlations": [
+    {
+      "dataset": "fake",
+      "model": "ResNet-50",
+      "pearson_accuracy_vs_ks": NaN,
+      "pearson_accuracy_vs_mmd": NaN,
+      "spearman_accuracy_vs_ks": NaN,
+      "spearman_accuracy_vs_mmd": NaN
+    },
+    {
+      "dataset": "fake",
+      "model": "EfficientNet-B0",
+      "pearson_accuracy_vs_ks": NaN,
+      "pearson_accuracy_vs_mmd": NaN,
+      "spearman_accuracy_vs_ks": NaN,
+      "spearman_accuracy_vs_mmd": NaN
+    }
+  ],
+  "high_level_findings": [
+    {
+      "dataset": "fake",
+      "model": "ResNet-50",
+      "largest_accuracy_drop": {
+        "drift_type": "gaussian_noise",
+        "severity": "low",
+        "accuracy_drop": 0.0
+      },
+      "largest_mmd": {
+        "drift_type": "brightness_shift",
+        "severity": "low",
+        "mmd": 1.0915777683258057
+      }
+    },
+    {
+      "dataset": "fake",
+      "model": "EfficientNet-B0",
+      "largest_accuracy_drop": {
+        "drift_type": "gaussian_noise",
+        "severity": "low",
+        "accuracy_drop": 0.0
+      },
+      "largest_mmd": {
+        "drift_type": "brightness_shift",
+        "severity": "medium",
+        "mmd": 0.9216286540031433
+      }
+    }
+  ]
+}
